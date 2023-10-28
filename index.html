@@ -31,8 +31,22 @@
     // 🧠 There are many ways to solve this, but practice using a for loop to iterate over the array.
     // 🧠 As you have done in the past, declare a variable before you start looping, to accumulate the result.
     function sumNumsFor(nums) {
+      let result = 0
+
+      for (let i = 0; i <= nums.length; i++) {
+        if (!nums.length) {
+          return 0
+        } else if (nums[i] === 13) {
+          return "I'm too superstitious!"
+        } else if (typeof nums[i] !== "number") {
+          continue
+        }
+        result += nums[i]
+      }
+      return result
 
     }
+
 
     // 👉 CHALLENGE 2
     // 🧠 The function stripVowels takes a string, strips all lowcase vowel letters (a,e,i,o,u) from it and returns it.
@@ -41,17 +55,44 @@
     // ❗ Notes:
     // 🧠 There are many ways to solve this, but practice using a for loop to iterate over the characters of the string.
     function stripVowels(str) {
+      let strArray = str.split('')
+      let result = []
 
+      for (let i = 0; i < strArray.length; i++) {
+        if (strArray[i] !== 'a' && strArray[i] !== 'e' && strArray[i] !== 'i' && strArray[i] !== 'o' && strArray[i] !== 'u') {
+          result.push(strArray[i])
+        }
+      }
+      let result1 = result.join("")
+      return result1
     }
+
+
 
     // 👉 CHALLENGE 3
     // 🧠 Reimplement sumNumsFor using a while loop instead of a for loop.
     // 🧠 Examples of usage:
     // sumNumsWhile([1, 2, 3]) // should return 6
     // sumNumsWhile([1, 2, 13]) // should return "I'm too superstitious!"
-    function sumNumsWhile() {
+    function sumNumsWhile(nums) {
+      let result = 0
+      let i = 0
 
+      while (i < nums.length) {
+        if (!nums.length) {
+          return 0
+        } else if (nums[i] === 13) {
+          return "I'm too superstitious!"
+        } else if (typeof nums[i] !== "number") {
+          i++
+          continue
+        }
+        result += nums[i]
+        i++
+      }
+      return result
     }
+
 
     // 👉 CHALLENGE 4
     // 🧠 The function fightMonsters takes an integer (lifePoints) as its argument, and returns a string.
@@ -70,8 +111,18 @@
     // 🧠 There are many ways to solve this, but practice using a while loop.
     // 🧠 Work out using pen and paper how the round number and the lifePoints change after each round.
     // 🧠 As long as there are lifePoints, decrease lifePoints by round number, and increase round number by one.
-    function fightMonsters() {
+    function fightMonsters(lifePoints) {
+      let round = 0
 
+      while (lifePoints >= 1) {
+        round++
+        lifePoints -= round
+
+        if (lifePoints <= 0) {
+          return `You died in round ${round}`
+        }
+
+      }
     }
 
     // 👉 CHALLENGE 5
@@ -81,7 +132,17 @@
     // findEvenNums([0, 1, 2, 3, 4]) // should return [0, 2, 4]
     // ❗ Notes:
     // 🧠 Use any kind of loop you'd like and the push method to populate the array of even numbers.
-    function findEvenNums() {
+    function findEvenNums(evenInt) {
+      let result = []
+
+      for (let i = 0; i < evenInt.length; i++) {
+        if (evenInt[i] === 0) {
+          result.push(evenInt[i])
+        } else if (evenInt[i] % 2 === 0) {
+          result.push(evenInt[i])
+        }
+      }
+      return result
 
     }
 
@@ -92,7 +153,22 @@
     // 🧠 Ages in the subarrays should appear in the same order they appeared in the original array.
     // 🧠 Examples of usage:
     // separateAges([31, 12, 25, 65, 84, 20]) // should return [[12, 20], [31, 25, 65, 84]]
-    function separateAges() {
+    function separateAges(ages) {
+      let arrayAges = []
+      let underTo = []
+      let overTo = []
+
+      for (i = 0; i <= ages.length; i++) {
+        if (ages[i] < 21) {
+          underTo.push(ages[i])
+        } else if (ages[i] >= 21) {
+          overTo.push(ages[i])
+        }
+
+      }
+      arrayAges.push(underTo)
+      arrayAges.push(overTo)
+      return arrayAges
 
     }
 
@@ -103,7 +179,23 @@
     // 🧠 The "tail" prop contains an array holding the elements of the array after the first one.
     // 🧠 Examples of usage:
     // headAndTail([1, 2, 3]) // should return { head: 1, tail: [2, 3] }
-    function headAndTail() {
+    function headAndTail(prob) {
+      let head
+      let tail = []
+      let result = {}
+
+      for (i = 0; i < prob.length; i++) {
+        if (i > 0) {
+          tail.push(prob[i])
+        } else {
+          head = prob[i]
+        }
+      }
+      result.head = head
+      result.tail = tail
+
+      return result
+      // return {"head": ${head}, tail: [${tail}]}
 
     }
 
@@ -114,7 +206,30 @@
     // nestedLoops(['hello', 'goodbye']) // should return ['hEllO', 'gOOdbyE']
     // ❗ Notes:
     // 🧠 To capitalize a string you can use its toUpperCase method: "a".toUpperCase() returns "A"
-    function nestedLoops() {
+    function nestedLoops(stringArray) {
+      let splitChar = []
+      let rslt = []
+      let result = []
+
+      for (let i = 0; i < stringArray.length; i++) {
+        let rsltr = []
+        splitChar = stringArray[i].split('')
+
+
+        for (let j = 0; j < splitChar.length; j++) {
+          if (
+            splitChar[j] === 'i' || splitChar[j] === 'a' ||
+            splitChar[j] === 'e' || splitChar[j] === 'o' ||
+            splitChar[j] === 'u'
+          ) {
+            rsltr.push(splitChar[j].toUpperCase())
+          } else {
+            rsltr.push(splitChar[j])
+          }
+        }
+        result.push(rsltr.join(''))
+      }
+      return result
 
     }
 
@@ -130,6 +245,17 @@
     // 🧠 Note that pop modifies the original array in place and returns the "popped" element, whereas slice gives us a brand new array.
     function crazyTrimmer(arr) {
 
+      for (let i = 0; i < arr.length; i++) {
+        if ((arr.length) % 2 === 0) {
+          arr.pop()
+          return arr
+
+        } else if ((arr.length) % 2 !== 0) {
+          let newSliceArr = arr.slice(1, (arr.length - 1))
+          return newSliceArr
+
+        }
+      }
     }
 
     // 🧪 TESTS, do not work below this line
